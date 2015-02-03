@@ -1,2 +1,2 @@
-Description: Control enigma2 with your Browser
+Description: Control enigma2 with your Browser openNFR-Mod
 Depends: enigma2, python-twisted-web, python-pyopenssl, python-crypt, python-misc, aio-grab

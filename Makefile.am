@@ -3,7 +3,8 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = \
 	webadmin \
 	webbouqueteditor \
-	webinterface 
+	webinterface
+
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml

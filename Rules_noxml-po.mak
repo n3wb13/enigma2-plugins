@@ -11,13 +11,9 @@ if UPDATE_PO
 $(PLUGIN)-py.pot: $(srcdir)/../src/*.py
 	$(XGETTEXT) --no-wrap -L python --from-code=UTF-8 --add-comments="TRANSLATORS:" -d $(PLUGIN) -s -o $@ $^
 
-$(PLUGIN)-xml.pot: $(top_srcdir)/xml2po.py $(srcdir)/../src/*.xml
-	$(PYTHON) $^ > $@
-
-$(PLUGIN).pot: $(PLUGIN)-py.pot $(PLUGIN)-xml.pot
+$(PLUGIN).pot: $(PLUGIN)-py.pot
 	sed --in-place $(PLUGIN)-py.pot --expression=s/CHARSET/UTF-8/
-	sed --in-place $(PLUGIN)-xml.pot --expression=s/CHARSET/UTF-8/
-	cat $^ | $(MSGUNIQ) --no-wrap --no-location -o $@
+	$(MSGUNIQ) --no-wrap --no-location $^ -o $@
 
 %.po: $(PLUGIN).pot
 	if [ -f $@ ]; then \

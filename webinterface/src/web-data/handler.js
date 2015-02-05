@@ -145,6 +145,13 @@ var ExternalsHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
+var ExternalsHandler1 = Class.create(AbstractContentHandler, {
+	initialize: function($super, target){
+		$super('tplNavExtrasExternals1', target);
+		this.provider = new ExternalsProvider1(this.show.bind(this));
+		this.ajaxload = false;
+	}
+});
 var SimplePageHandler = Class.create(AbstractContentHandler,{
 	initialize: function($super, target){
 		$super(null, target);

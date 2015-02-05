@@ -23,6 +23,7 @@ function url() {
 	this.moviedelete= "/web/moviedelete"; // plus serviceref
 
 	this.about= "/web/about";
+	this.softcamcontrol= "/web/softcamcontrol";
 	this.settings= "/web/settings";
 	this.parentcontrol= "/web/parentcontrollist";
 	this.signal = "/web/signal";

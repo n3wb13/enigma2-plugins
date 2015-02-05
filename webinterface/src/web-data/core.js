@@ -901,6 +901,7 @@ var SimplePages = Class.create({
 	PAGE_POWER : 'tplPower',
 	PAGE_SETTINGS: 'tplSettings',
 	PAGE_SOFTCAMCONTROL: 'tplSoftcamControl',
+	PAGE_MULTIBOOTCONTROL: 'tplMultibootControl',
 	PAGE_TOOLS: 'tplTools',
 
 	initialize: function(target){
@@ -932,7 +933,13 @@ var SimplePages = Class.create({
 	loadSoftcamControl: function(){
 		setContentHd('SoftcamControl');
 		this.show(this.PAGE_SOFTCAMCONTROL);
-	},	
+	},
+	
+	loadMultibootControl: function(){
+		setContentHd('MultibootControl');
+		this.show(this.PAGE_MULTIBOOTCONTROL);
+	}, 	
+	
 	loadSettings: function(){
 		setContentHd(strings.settings);
 		var debug = userprefs.data.debug;
@@ -1274,7 +1281,8 @@ var E2WebCore = Class.create(BaseCore, {
 				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), strings.mediaplayer); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages),
-				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages)
+				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages),
+				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages)
 			}
 		};
 	},

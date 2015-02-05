@@ -287,6 +287,20 @@ var ExternalsProvider = Class.create(AbstractContentProvider, {
 	}
 });
 
+var ExternalsProvider1 = Class.create(AbstractContentProvider, {
+	initialize: function($super, showFnc){
+		$super(URL.external, showFnc);
+	},
+
+	renderXML: function(xml){
+		var ext = new ExternalList(xml);
+		var data = {
+				'externals' : ext.getArray(),
+				'anyGui' : ext.anyGui
+			};
+		return data;
+	}
+});
 var MultiEpgProvider = Class.create(AbstractContentProvider, {
 	initialize: function($super, showFnc){
 		$super(URL.epgmulti, showFnc);

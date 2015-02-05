@@ -147,6 +147,23 @@ var Externals = Class.create(Controller, {
 	}
 });
 
+var Externals1 = Class.create(Controller, {
+	initialize: function($super, target){
+		$super(new ExternalsHandler1(target));
+		this.loaded = false;
+	},
+
+	load: function(){
+		if(!this.loaded)
+			this.handler.load({});
+		else
+			this.handler.show(this.handler.data);
+	},
+
+	onFinished: function(){
+		this.loaded = true;
+	}
+});
 var EPG = Class.create(Controller, {
 	initialize: function($super){
 		$super(new EpgListHandler(this.show.bind(this)));
@@ -883,6 +900,7 @@ var SimplePages = Class.create({
 	PAGE_MESSAGE : 'tplSendMessage',
 	PAGE_POWER : 'tplPower',
 	PAGE_SETTINGS: 'tplSettings',
+	PAGE_SOFTCAMCONTROL: 'tplSoftcamControl',
 	PAGE_TOOLS: 'tplTools',
 
 	initialize: function(target){
@@ -911,6 +929,10 @@ var SimplePages = Class.create({
 		this.show(this.PAGE_POWER);
 	},
 
+	loadSoftcamControl: function(){
+		setContentHd('SoftcamControl');
+		this.show(this.PAGE_SOFTCAMCONTROL);
+	},	
 	loadSettings: function(){
 		setContentHd(strings.settings);
 		var debug = userprefs.data.debug;
@@ -1058,7 +1080,7 @@ var BaseCore = Class.create({
 		this.popUpBlockerHinted = false;
 		this.hideNotifierTimeout = '';
 		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
-		if(userprefs.data.style != "openNFR" && userprefs.data.style != "openNFR1" && userprefs.data.style != "modern"){
+		if(userprefs.data.style != "openNFR" && userprefs.data.style != "light" && userprefs.data.style != "modern"){
 			userprefs.data.style = "openNFR";
 			userprefs.save();
 		}
@@ -1157,7 +1179,7 @@ var BaseCore = Class.create({
 	
 	styleChanged: function(){
 	switch(userprefs.data.style){
-		case 'openNFR1':
+		case 'light':
 			$('style_dark').disabled = true;
 			$('style_light').disabled = false;
 			$('style_modern').disabled = true;
@@ -1199,6 +1221,7 @@ var E2WebCore = Class.create(BaseCore, {
 		this.bouquets = new Bouquets('contentBouquets', 'contentMain');
 		this.current = new Current('currentContent', 'volContent');
 		this.externals = new Externals('navExternalsContainer');
+		this.externals1 = new Externals1('navExternalsContainer1');		
 		this.epg = new EPG(new EpgListHandler());
 		this.lt = new LocationsAndTags();
 		this.mediaplayer = new MediaPlayer('contentMain');
@@ -1250,7 +1273,8 @@ var E2WebCore = Class.create(BaseCore, {
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
 				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), strings.mediaplayer); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
-				'tools' : this.simplepages.loadTools.bind(this.simplepages)
+				'tools' : this.simplepages.loadTools.bind(this.simplepages),
+				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages)
 			}
 		};
 	},
@@ -1987,6 +2011,10 @@ var E2WebCore = Class.create(BaseCore, {
 
 		default:
 			break;
+		case "menu":
+			this.reloadNav('tplNavMenu', strings.menu, this.externals1.load.bind(this.externals1));
+			break;			
+			
 		}
 	},
 

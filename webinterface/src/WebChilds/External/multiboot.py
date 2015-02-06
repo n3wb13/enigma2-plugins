@@ -78,17 +78,14 @@ class MultibootControl(resource.Resource):
         	req.setHeader('charset', 'UTF-8')
         	infoList = checkImages(None)
         	html = header_string
-        	print "infolist:", infoList
         	if  "no Multiboot Installed!" in infoList:
                         html += '<center><table style="width: 100%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">NO MultiBoot Installed</td></tr></center>'
                         self.finished()
-                        print "1"
                 else: 
         		for info in infoList:
        		    		addExternalChild(('%sstart' % info, ImageStart(info)))
         	    		Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, booten)
          	    		html += '<center><table style="width: 80%%;table-layout: fixed;" border="1" cellspacing="0"><tr><td align="left">%s:</td><td align="right">%s</td></tr></center>' % (info, Images)
-        	                print "2"
                 return html
         	
  	def finished(self):
@@ -102,7 +99,6 @@ class ImageStart(resource.Resource):
         	self.container = eConsoleAppContainer()
         	self.container.appClosed.append(self.finished)
         	self.input = input
-        	print 'self.input', self.input
 
     
 	def render_GET(self, req):
@@ -110,10 +106,8 @@ class ImageStart(resource.Resource):
         	req.setHeader('Content-type', 'text/html')
         	req.setHeader('charset', 'UTF-8')
         	html = header_string
-        	print "3"
         	for info in infoList:
         		if info == self.input:
-        		        print "4"
         			out = open('/media/nfr4xboot/NFR4XBootI/.nfr4xboot', 'w')
         			out.write(self.input)
         			out.close()

@@ -609,10 +609,6 @@ def configCB(result, session):
 		print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
-	pngpath = resolveFilename(SCOPE_CURRENT_SKIN, "prev.png")
-	print "pngpath:", pngpath
-	webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/img/skin.png"
-	shutil.copyfile(pngpath, webpngpath)
 	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
 	p.weight = 100 #webif should start as last plugin
 	list = [p,

@@ -57,10 +57,13 @@ def checkImages(objelt):
                 
         try:
                 mypath2 = mypath + 'NFR4XBootI/'
-                myimages = os.listdir(mypath2)
-                for fil in myimages:
-                        if os.path.isdir(os.path.join(mypath2, fil)):
-                                zeilen.append(fil)
+                if os.path.exists(mypath2):
+                        myimages = os.listdir(mypath2)
+                        for fil in myimages:
+                                if os.path.isdir(os.path.join(mypath2, fil)):
+                                        zeilen.append(fil)
+                else:
+                        zeilen.append("no Multiboot Installed!")                
 	finally:
 		infoList = zeilen                                
         return infoList
@@ -75,12 +78,21 @@ class MultibootControl(resource.Resource):
         	req.setHeader('charset', 'UTF-8')
         	infoList = checkImages(None)
         	html = header_string
-        	for info in infoList:
-       		    addExternalChild(('%sstart' % info, ImageStart(info)))
-        	    Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, booten)
-         	    html += '<center><table style="width: 80%%;table-layout: fixed;" border="1" cellspacing="0"><tr><td align="left">%s:</td><td align="right">%s</td></tr></center>' % (info, Images)
-        	return html
-
+        	print "infolist:", infoList
+        	if  "no Multiboot Installed!" in infoList:
+                        html += '<center><table style="width: 100%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">NO MultiBoot Installed</td></tr></center>'
+                        self.finished()
+                        print "1"
+                else: 
+        		for info in infoList:
+       		    		addExternalChild(('%sstart' % info, ImageStart(info)))
+        	    		Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, booten)
+         	    		html += '<center><table style="width: 80%%;table-layout: fixed;" border="1" cellspacing="0"><tr><td align="left">%s:</td><td align="right">%s</td></tr></center>' % (info, Images)
+        	                print "2"
+                return html
+        	
+ 	def finished(self):
+        	print 'finished'
 
 class ImageStart(resource.Resource):
     
@@ -98,8 +110,10 @@ class ImageStart(resource.Resource):
         	req.setHeader('Content-type', 'text/html')
         	req.setHeader('charset', 'UTF-8')
         	html = header_string
+        	print "3"
         	for info in infoList:
         		if info == self.input:
+        		        print "4"
         			out = open('/media/nfr4xboot/NFR4XBootI/.nfr4xboot', 'w')
         			out.write(self.input)
         			out.close()

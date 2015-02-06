@@ -902,6 +902,7 @@ var SimplePages = Class.create({
 	PAGE_SETTINGS: 'tplSettings',
 	PAGE_SOFTCAMCONTROL: 'tplSoftcamControl',
 	PAGE_MULTIBOOTCONTROL: 'tplMultibootControl',
+	PAGE_BACKGROUNDCHANGE: 'tplBackgroundChange',
 	PAGE_TOOLS: 'tplTools',
 
 	initialize: function(target){
@@ -939,6 +940,11 @@ var SimplePages = Class.create({
 		setContentHd('MultibootControl');
 		this.show(this.PAGE_MULTIBOOTCONTROL);
 	}, 	
+
+	loadBackgroundChange: function(){
+		setContentHd('BackgroundChange');
+		this.show(this.PAGE_BACKGROUNDCHANGE);
+	},
 	
 	loadSettings: function(){
 		setContentHd(strings.settings);
@@ -1282,7 +1288,8 @@ var E2WebCore = Class.create(BaseCore, {
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
 				'tools' : this.simplepages.loadTools.bind(this.simplepages),
 				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages),
-				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages)
+				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages),
+				'backgroundchange' : this.simplepages.loadBackgroundChange.bind(this.simplepages)
 			}
 		};
 	},

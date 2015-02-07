@@ -1286,11 +1286,13 @@ var E2WebCore = Class.create(BaseCore, {
 				'deviceinfo' : this.simplepages.loadDeviceInfo.bind(this.simplepages),
 				'mediaplayer' : function() { this.loadContentDynamic(this.mediaplayer.load.bind(this.mediaplayer), strings.mediaplayer); }.bind(this),
 				'settings' : this.simplepages.loadSettings.bind(this.simplepages),
-				'tools' : this.simplepages.loadTools.bind(this.simplepages),
+				'tools' : this.simplepages.loadTools.bind(this.simplepages)
+			},
+			'opennfr': {
 				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages),
 				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages),
 				'backgroundchange' : this.simplepages.loadBackgroundChange.bind(this.simplepages)
-			}
+			}			
 		};
 	},
 
@@ -2026,8 +2028,8 @@ var E2WebCore = Class.create(BaseCore, {
 
 		default:
 			break;
-		case "menu":
-			this.reloadNav('tplNavMenu', strings.menu, this.externals1.load.bind(this.externals1));
+		case "opennfr":
+			this.reloadNav('tplNavOpennfr', strings.opennfr, this.externals.load.bind(this.externals));
 			break;			
 			
 		}

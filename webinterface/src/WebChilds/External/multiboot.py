@@ -43,6 +43,7 @@ header_string += '</head><body><font color="#485052" >'
 tself = 'target="_self"'
 
 global infoList	
+global mypath
 
 def checkImages(objelt):
         infoList = []
@@ -107,26 +108,49 @@ class ImageStart(resource.Resource):
         	req.setHeader('charset', 'UTF-8')
         	html = header_string
         	for info in infoList:
-        		if info == self.input:
-        			out = open('/media/nfr4xboot/NFR4XBootI/.nfr4xboot', 'w')
-        			out.write(self.input)
-        			out.close()
-        			os.system('rm /tmp/.nfr4xreboot')
-                                os.system('touch /tmp/.nfr4xreboot')
-                                os.system('reboot -p')        	    
-                		html += '<center>%s erfolgreich Gestartet!  <a href="MultibootControl" target="_self"><input type="submit" value="Zur&uuml;ck"></a></center>' % self.input
-                		continue
-        		html += '<p></p>'
-        	return html
+        		if info == self.input:        	
+        			addExternalChild(('%sstart' % info, ImageReboot(info)))
+                		html += '<center>Boot Image now?!<a href="%skill" target="_self"><input type="submit" value="Boot"></a><p></p><p></p></center>' % (info)
+                		html += '<center>Boot Image by next reboot!<a href="javascript:location.reload()" target="_top"><input type="submit" value="back"></a></center>'
+        	return html        	
 
     
 	def finished(self, retval):
         	print 'finished', retval
 
+class ImageReboot(resource.Resource):
+    
+	def __init__(self, input):
+	        self.Console = Console()
+	        self.imagestartcmd = ""
+        	self.container = eConsoleAppContainer()
+        	self.container.appClosed.append(self.finished)
+        	self.input = input
+    
+	def render_GET(self, req):
+        	req.setResponseCode(http.OK)
+        	req.setHeader('Content-type', 'text/html')
+        	req.setHeader('charset', 'UTF-8')
+        	html = header_string
+                pluginpath = '/usr/lib/enigma2/python/Plugins/Extensions/NFR4XBoot'
+                f = open(pluginpath + '/.nfr4xboot_location', 'r')
+                mypath = f.readline().strip()
+                f.close()   
+        	files = mypath + "NFR4XBootI/.nfr4xboot"
+        	out = open(files, 'w')
+        	out.write(self.input)
+        	out.close()
+        	os.system('rm /tmp/.nfr4xreboot')
+                os.system('touch /tmp/.nfr4xreboot')
+                os.system('reboot -p')        	    
+        	return html
 
+	def finished(self, retval):
+        	print 'finished', retval
 
 
 addExternalChild(('MultibootControl', MultibootControl()))
 infoList = checkImages(None)
 for info in infoList:
 	addExternalChild(('%sstart' % info, ImageStart(info)))
+	addExternalChild(('%skill' % info, ImageReboot(info)))

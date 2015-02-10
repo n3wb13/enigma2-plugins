@@ -49,17 +49,14 @@ def checkImages(objelt):
         infoList = []
         zeilen = list()
         try:
-                backpath = '/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/background/'
+                backpath = '/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/background/'
                 if os.path.exists(backpath):
                         myimages = os.listdir(backpath)
-                        print "myimages:", myimages 
                         for fil in myimages:
                                 zeilen.append(fil)
-                        print "1"                
                 else:
                         zeilen.append("no Backgroundimage found!")                                        
 	finally:
-	        print "zeilen:", zeilen
 		infoList = zeilen                                
         return infoList
 
@@ -72,7 +69,6 @@ class BackgroundChange(resource.Resource):
         	req.setHeader('Content-type', 'text/html')
         	req.setHeader('charset', 'UTF-8')
         	infoList = checkImages(None)
-        	print "infolist:", infoList
         	html = header_string        	
         	if  "no Backgroundimage found!" in infoList:
                         html += '<center><table style="width: 100%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">NO Backgroundimage found</td></tr></center>'
@@ -80,8 +76,10 @@ class BackgroundChange(resource.Resource):
                 else: 
         		for info in infoList:
        		    		addExternalChild(('%sstart' % info, ImageCP(info)))
-        	    		Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, change)
-         	    		html += '<center><table style="width: 80%%;table-layout: fixed;" border="1" cellspacing="0"><tr><td align="left">%s:</td><td align="right">%s</td></tr></center>' % (info, Images)
+       		    		pngpath = "/web-data/background/" + info
+      		    		Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, change)
+         	    		html += '<center><table style="width: 80%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">%s:</td><td><img src="%s" width="100%%" height="100%%" align="left"></td><td align="right">%s</td></tr></center>' % (info, pngpath, Images) 
+        
                 return html
         	
  	def finished(self):
@@ -95,7 +93,6 @@ class ImageCP(resource.Resource):
         	self.container = eConsoleAppContainer()
         	self.container.appClosed.append(self.finished)
         	self.input = input
-        	print 'self.input', self.input
 
     
 	def render_GET(self, req):
@@ -106,7 +103,7 @@ class ImageCP(resource.Resource):
         	for info in infoList:
         		if info == self.input:
                 		webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/img/skin.png"
-                		backpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/background/" + self.input 
+                		backpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/background/" + self.input 
                 		shutil.copyfile(backpath, webpngpath)      	    
                 		html += '<center>%s Background Changed!  <a href="javascript:location.reload()" target="_top"><input type="submit" value="Zur&uuml;ck"></a></center>' % self.input
                 		continue
@@ -124,3 +121,4 @@ addExternalChild(('BackgroundChange', BackgroundChange()))
 infoList = checkImages(None)
 for info in infoList:
 	addExternalChild(('%sstart' % info, ImageCP(info)))
+

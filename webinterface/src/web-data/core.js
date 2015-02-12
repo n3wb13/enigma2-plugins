@@ -904,6 +904,7 @@ var SimplePages = Class.create({
 	PAGE_MULTIBOOTCONTROL: 'tplMultibootControl',
 	PAGE_BACKGROUNDCHANGE: 'tplBackgroundChange',
 	PAGE_KEYMAPCHANGE: 'tplKeymapChange',
+	PAGE_FACTORYRESET: 'tplFactoryReset',
 	PAGE_TOOLS: 'tplTools',
 
 	initialize: function(target){
@@ -951,6 +952,11 @@ var SimplePages = Class.create({
 		setContentHd('KeymapChange');
 		this.show(this.PAGE_KEYMAPCHANGE);
 	},	
+
+	loadFactoryReset: function(){
+		setContentHd('FactoryReset');
+		this.show(this.PAGE_FACTORYRESET);
+	}, 
 	
 	loadSettings: function(){
 		setContentHd(strings.settings);
@@ -1298,7 +1304,8 @@ var E2WebCore = Class.create(BaseCore, {
 				'softcamcontrol' : this.simplepages.loadSoftcamControl.bind(this.simplepages),
 				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages),
 				'backgroundchange' : this.simplepages.loadBackgroundChange.bind(this.simplepages),
-				'keymapchange' : this.simplepages.loadKeymapChange.bind(this.simplepages)
+				'keymapchange' : this.simplepages.loadKeymapChange.bind(this.simplepages),
+				'factoryreset' : this.simplepages.loadFactoryReset.bind(this.simplepages)
 			}			
 		};
 	},

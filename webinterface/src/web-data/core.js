@@ -1105,7 +1105,7 @@ var BaseCore = Class.create({
 		this.popUpBlockerHinted = false;
 		this.hideNotifierTimeout = '';
 		this.sessionProvider = new SessionProvider( this.onSessionAvailable.bind(this) );
-		if(userprefs.data.style != "openNFR" && userprefs.data.style != "openNFR1" && userprefs.data.style != "modern"){
+		if(userprefs.data.style != "openNFR" && userprefs.data.style != "openNFR1" && userprefs.data.style != "modern" && userprefs.data.style != "orgdark"){
 			userprefs.data.style = "openNFR";
 			userprefs.save();
 		}
@@ -1208,16 +1208,25 @@ var BaseCore = Class.create({
 			$('style_dark').disabled = true;
 			$('style_light').disabled = false;
 			$('style_modern').disabled = true;
+			$('style_orgdark').disabled = true;			
 			break;
 		case 'openNFR':
 			$('style_dark').disabled = false;
 			$('style_light').disabled = true;
 			$('style_modern').disabled = true;
+			$('style_orgdark').disabled = true;			
 			break;
+		case 'orgdark':
+			$('style_dark').disabled = true;
+			$('style_light').disabled = true;
+			$('style_modern').disabled = true;
+			$('style_orgdark').disabled = false;			
+			break;			
 		default:
 			$('style_dark').disabled = true;
 			$('style_light').disabled = true;
 			$('style_modern').disabled = false;
+			$('style_orgdark').disabled = true;			
 			break;
 		}
 	}

@@ -67,6 +67,7 @@ webinterface/src/web-data/Makefile
 webinterface/src/web-data/fonts/Makefile
 webinterface/src/web-data/gfx/Makefile
 webinterface/src/web-data/img/Makefile
+webinterface/src/web-data/background/Makefile
 webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/lib/lang/Makefile
 webinterface/src/web-data/lib/datepicker/Makefile

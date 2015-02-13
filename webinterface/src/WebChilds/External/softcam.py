@@ -43,6 +43,10 @@ config.NFRSoftcam.camconfig = ConfigText(default = "/usr/keys", fixed_size=False
 global infoList	
 def checkCams(objelt):
         infoList = []
+        if os.path.isfile('/etc/emulist'):
+                print "emilist found"
+        else:
+                os.system('echo "no Softcam installed" >/etc/emulist')        
         f = open("/etc/emulist", 'r')
         zeilen = list()
         try:

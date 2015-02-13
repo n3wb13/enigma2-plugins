@@ -64,7 +64,7 @@
 .aboutHeader{color:#333;font-weight:bold;width:100%;}
 .bListSLink{padding:10px 3px;}
 .bListSLink:hover, a.sListSLink:hover {background-color:#ededed;display:block;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);}
-.bannerHeader{background-image:url(/web-data/img/dreamboxweb_modern.png);height:16px;width:780px;margin:7px;padding:0;}
+.bannerHeader{background-image:url(/web-data/img/opennfr_modern.png);height:32px;width:780px;margin:7px;padding:0;}
 .bold{font-weight:bold;}
 .bottom,#current img{vertical-align:bottom;}
 .bouquetIcons{float:left;padding-top:10px;width:40px;}

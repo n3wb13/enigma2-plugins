@@ -46,7 +46,7 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 config.plugins.Webinterface.http = ConfigSubsection()
 config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
-config.plugins.Webinterface.http.port = ConfigInteger(default = 85, limits=(1, 65535) )
+config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 65535) )
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()

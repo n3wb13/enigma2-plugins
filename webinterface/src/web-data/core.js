@@ -1221,11 +1221,17 @@ var BaseCore = Class.create({
 			$('style_light').disabled = true;
 			$('style_modern').disabled = true;
 			$('style_orgdark').disabled = false;			
-			break;			
-		default:
+			break;	
+		case 'modern':
 			$('style_dark').disabled = true;
 			$('style_light').disabled = true;
 			$('style_modern').disabled = false;
+			$('style_orgdark').disabled = true;			
+			break;                        		
+		default:
+			$('style_dark').disabled = false;
+			$('style_light').disabled = true;
+			$('style_modern').disabled = true;
 			$('style_orgdark').disabled = true;			
 			break;
 		}
@@ -2162,3 +2168,4 @@ DropDownHandler = Class.create({
 var dropDownHandler = new DropDownHandler();
 
 var core = new E2WebCore();
+

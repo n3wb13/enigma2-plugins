@@ -4,9 +4,5 @@ SUBDIRS = streaminterface
 
 install_DATA = 	default.appcache \
 				index.html \
-				multiepg.css \
-				style.min.css \
-				style_light.min.css \
-				style_modern.min.css \
-				style.css \
+				*.css \
 				*.htm

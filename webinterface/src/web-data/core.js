@@ -905,6 +905,7 @@ var SimplePages = Class.create({
 	PAGE_BACKGROUNDCHANGE: 'tplBackgroundChange',
 	PAGE_KEYMAPCHANGE: 'tplKeymapChange',
 	PAGE_FACTORYRESET: 'tplFactoryReset',
+	PAGE_SKINCHANGE: 'tplSkinChange',
 	PAGE_TOOLS: 'tplTools',
 
 	initialize: function(target){
@@ -947,6 +948,11 @@ var SimplePages = Class.create({
 		setContentHd('BackgroundChange');
 		this.show(this.PAGE_BACKGROUNDCHANGE);
 	},
+	
+	loadSkinChange: function(){
+		setContentHd('SkinChange');
+		this.show(this.PAGE_SKINCHANGE);
+	},	
 	
 	loadKeymapChange: function(){
 		setContentHd('KeymapChange');
@@ -1320,7 +1326,8 @@ var E2WebCore = Class.create(BaseCore, {
 				'multibootcontrol' : this.simplepages.loadMultibootControl.bind(this.simplepages),
 				'backgroundchange' : this.simplepages.loadBackgroundChange.bind(this.simplepages),
 				'keymapchange' : this.simplepages.loadKeymapChange.bind(this.simplepages),
-				'factoryreset' : this.simplepages.loadFactoryReset.bind(this.simplepages)
+				'factoryreset' : this.simplepages.loadFactoryReset.bind(this.simplepages),
+				'skinchange' : this.simplepages.loadSkinChange.bind(this.simplepages),
 			}			
 		};
 	},
@@ -2168,4 +2175,3 @@ DropDownHandler = Class.create({
 var dropDownHandler = new DropDownHandler();
 
 var core = new E2WebCore();
-

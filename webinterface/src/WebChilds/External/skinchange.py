@@ -14,7 +14,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Screens.Standby import *
 from enigma import eTimer, eEnv
-from os import path
+from os import path, mkdir
 import os
 import sys
 import struct
@@ -52,12 +52,19 @@ def checkSkin(objelt):
 	#config = config.skin.primary_skin
         infoList = []
         zeilen = list()
+        if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin"):
+                os.system("rm /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin/*.*")
+        else:
+                mkdir("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin")
         try:
                 for root, dirs, files in os.walk(root, followlinks=True):
 			for subdir in dirs:
 				dir = os.path.join(root,subdir)
 				if os.path.exists(os.path.join(dir,SKINXML)):
-					skinlist.append(subdir)
+				        pngpath = os.path.join(os.path.join(root, subdir), "prev.png")
+					webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin/" + subdir + ".png" 
+                                        shutil.copyfile(pngpath, webpngpath)
+                                        skinlist.append(subdir)
 			dirs = []
          
 	finally:
@@ -82,7 +89,7 @@ class SkinChange(resource.Resource):
                 #else: 
         	for info in infoList:
        			addExternalChild(('%sstart' % info, SkinSel(info)))
-       			pngpath = os.path.join(os.path.join(root, info), "prev.png")
+       			pngpath = "/web-data/skin/" + info + ".png"
       			Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, change)
          		html += '<center><table style="width: 80%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">%s:</td><td><img src="%s" width="100%%" height="100%%" align="left"></td><td align="right">%s</td></tr></center>' % (info, pngpath, Images) 
         

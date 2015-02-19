@@ -85,4 +85,8 @@ webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile
 webinterface/src/WebComponents/Converter/Makefile
 webinterface/src/WebComponents/Sources/Makefile
+
+F3LEDControl/Makefile
+F3LEDControl/src/Makefile
+F3LEDControl/meta/Makefile
 ])

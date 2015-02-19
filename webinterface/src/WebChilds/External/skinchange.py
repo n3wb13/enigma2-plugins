@@ -57,12 +57,20 @@ def checkSkin(objelt):
         else:
                 mkdir("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin")
         try:
+                pngpath = "/usr/share/enigma2/prev.png"
+		webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin/default.png"
+                shutil.copyfile(pngpath, webpngpath)
                 for root, dirs, files in os.walk(root, followlinks=True):
 			for subdir in dirs:
 				dir = os.path.join(root,subdir)
 				if os.path.exists(os.path.join(dir,SKINXML)):
+				        print "Subdir=", subdir
 				        pngpath = os.path.join(os.path.join(root, subdir), "prev.png")
-					webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin/" + subdir + ".png" 
+					if os.path.exists(pngpath):
+					        print "prev found"	 
+                                        else:
+                                                pngpath = "/usr/share/enigma2/skin_default/noprev.png"
+                                        webpngpath = "/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/skin/" + subdir + ".png" 
                                         shutil.copyfile(pngpath, webpngpath)
                                         skinlist.append(subdir)
 			dirs = []
@@ -89,7 +97,11 @@ class SkinChange(resource.Resource):
                 #else: 
         	for info in infoList:
        			addExternalChild(('%sstart' % info, SkinSel(info)))
-       			pngpath = "/web-data/skin/" + info + ".png"
+       			print "info=", info
+       			if info == "Default":
+       				pngpath = "/web-data/skin/default.png"
+       			else:	
+          			pngpath = "/web-data/skin/" + info + ".png"
       			Images = '<a href="%sstart" target="_self">%s</a></form>' % (info, change)
          		html += '<center><table style="width: 80%%;table-layout: fixed;" border="0" cellspacing="0"><tr><td align="left">%s:</td><td><img src="%s" width="100%%" height="100%%" align="left"></td><td align="right">%s</td></tr></center>' % (info, pngpath, Images) 
         

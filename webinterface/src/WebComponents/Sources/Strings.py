@@ -11,6 +11,7 @@ class Strings(Source):
 	"""
 	def getList(self):
 		return [
+			["opennfr" , _("OpenNFR-Menu")],
 			["television" , _("TeleVision")],
 			["tv", _("TV")],
 			["radio" , _("Radio")],

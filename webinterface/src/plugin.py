@@ -197,16 +197,16 @@ def startWebserver(session, l2k):
 				registerBonjourService('http', port)
 
 		#Streaming requires listening on localhost:80 no matter what, ensure it its available
-		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
+		if config.plugins.Webinterface.http.port.value != 88 or not config.plugins.Webinterface.http.enabled.value:
 			#LOCAL HTTP Connections (Streamproxy)
 			local4 = "127.0.0.1"
 			local4mapped = "::ffff:127.0.0.1"
 			local6 = "::1"
 
-			ret = startServerInstance(session, 80, useauth=auth, l2k=l2k, ipaddress=local4)
+			ret = startServerInstance(session, 88, useauth=auth, l2k=l2k, ipaddress=local4)
 			if not ret:
-				errors = "%s%s:%i\n" %(errors, local4, 80)
-			ret = startServerInstance(session, 80, useauth=auth, l2k=l2k, ipaddress=local4mapped, ipaddress2=local6)
+				errors = "%s%s:%i\n" %(errors, local4, 88)
+			ret = startServerInstance(session, 88, useauth=auth, l2k=l2k, ipaddress=local4mapped, ipaddress2=local6)
 			#ip6 is optional
 #			if not ret:
 #				errors = "%s%s/%s:%i\n" %(errors, local4mapped, local6, 80)

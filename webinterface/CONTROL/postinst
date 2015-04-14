@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Restarting Enigma2 to load MyTestPlugin Plugin ..."
+echo "Restarting Enigma2 to load Webinterface Plugin ..."
 init 4
 killall -9 enigma2 > /dev/null 2>&1
 init 3

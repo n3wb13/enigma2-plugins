@@ -68,8 +68,10 @@
 													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="${strings.download_item.format(item.name)}" border="0"></a>
 												{elseif !item.isdir}
 													<a href="#" class="mpPlayFile" title="${strings.play_item.format(item.name)}"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;" /></a>
-													<a href="#" class="mpAddFile" title="${strings.add_item_to_playlist.format(item.name)}"><img src="/web-data/img/page_add.png" border="0" alt="+" /></a>
-													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="${strings.download_item.format(item.name)}" border="0" alt="${strings.download}"/></a>
+													<a target="_blank" class="small" href="/web/ts.m3u?file=${item.name}" title="${strings.stream_channel.format(item.name)}" >
+													<img src="/web-data/img/screen.png" alt="${strings.do_stream}" border="0">
+                                                                                                        <a href="#" class="mpAddFile" title="${strings.add_item_to_playlist.format(item.name)}"><img src="/web-data/img/page_add.png" border="0" alt="+" /></a>
+                                                                                                        <a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="${strings.download_item.format(item.name)}" border="0" alt="${strings.download}"/></a>
 												{else}
 													<!--
 													<a href="#" class="mpAddFolder" title="Add folder '${item.name}' to playlist"><img src="/web-data/img/folder_add.png" border="0" alt="Add" /></a>

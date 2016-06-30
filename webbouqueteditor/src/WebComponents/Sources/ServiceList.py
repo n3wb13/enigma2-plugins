@@ -1,6 +1,5 @@
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference
-from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET
 from Components.config import config
 
 class ServiceList(Source):

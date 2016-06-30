@@ -5,7 +5,7 @@ from Components.config import config
 from os import remove, path, popen
 from Screens.InfoBar import InfoBar
 from ServiceReference import ServiceReference
-from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET, LIST_BLACKLIST
+from Components.ParentalControl import parentalControl, LIST_BLACKLIST
 from re import compile as re_compile
 from Components.NimManager import nimmanager 
 
